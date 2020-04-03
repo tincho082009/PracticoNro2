@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 vm.cambiarEstadoDolaresEuros();
+                vm.cambiarEstadoTextoDolares();
             }
         });
 
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 vm.cambiarEstadoEurosDolares();
+                vm.cambiarEstadoTextoEuros();
             }
         });
 

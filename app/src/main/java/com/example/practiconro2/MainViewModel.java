@@ -1,5 +1,7 @@
 package com.example.practiconro2;
 
+import android.widget.Toast;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -40,30 +42,37 @@ public class MainViewModel extends ViewModel {
         if(textoEuros==null){
             textoEuros = new MutableLiveData<Boolean>();
         }
-        return eurosDolares;
+        return textoEuros;
     }
     public void cambiarEstadoDolaresEuros(){
         dolaresEuros.setValue(false);
-        textoEuros.setValue(true);
-        textoDolares.setValue(false);
-
+        eurosDolares.setValue(true);
     }
     public void cambiarEstadoEurosDolares(){
         eurosDolares.setValue(false);
+        dolaresEuros.setValue(true);
+    }
+    public void cambiarEstadoTextoDolares(){
+        textoEuros.setValue(true);
+        textoDolares.setValue(false);
+    }
+    public void cambiarEstadoTextoEuros(){
         textoEuros.setValue(false);
         textoDolares.setValue(true);
     }
     public void conversion(String dolares, String euros){
-        if(dolaresEuros.getValue()){
+        if(textoDolares.getValue() && dolaresEuros.getValue()){
             double dolares1, res = 0;
             dolares1 = Double.parseDouble(dolares);
-            res = dolares1 * 0.926484;
+            res = dolares1 * 0.925272;
             resultado.setValue(res + "");
-        }else{
+        }else if(textoEuros.getValue() && eurosDolares.getValue()){
             double euros1, res = 0;
             euros1 = Double.parseDouble(euros);
-            res = euros1 * 1.07867;
+            res = euros1 * 1.08076;
             resultado.setValue(res + "");
+        }else{
+            resultado.setValue("ERROR");
         }
 
     }
