@@ -46,8 +46,7 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="1dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:enabled="false"/>
+        android:inputType="textPersonName" />
 
     <RadioGroup
         android:id="@+id/rgBotones"
@@ -64,8 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
-            android:text="Dolares a Euros"
-            android:checked="true"/>
+            android:text="Dolares a Euros" />
 
         <RadioButton
             android:id="@+id/rbEurosADolares"
