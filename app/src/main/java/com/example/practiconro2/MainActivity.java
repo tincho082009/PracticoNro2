@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvDolares, tvEuros, tvTituloResultado, tvResultado;
+    private TextView tvDolares, tvEuros, tvTituloResultado, tvResultado, tvCartelito;
     private EditText etDolares, etEuros;
     private RadioGroup rgBotones;
     private RadioButton rbEurosADolares, rbDolaresAEuros;
@@ -57,12 +57,21 @@ public class MainActivity extends AppCompatActivity {
                 etEuros.setEnabled(aBoolean);
             }
         });
+        vm.getCartel().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String aString) {
+                tvCartelito.setText(aString);
+            }
+        });
+        vm.cambiarEstadoDolaresEuros();
+        vm.cambiarEstadoTextoDolares();
     }
 
     private void configView(){
         tvDolares = findViewById(R.id.tvDolares);
         tvEuros = findViewById(R.id.tvEuros);
         tvTituloResultado = findViewById(R.id.tvTituloResultado);
+        tvCartelito = findViewById(R.id.tvCartelito);
         etDolares = findViewById(R.id.etDolares);
         etEuros = findViewById(R.id.etEuros);
         tvResultado = findViewById(R.id.tvResultado);

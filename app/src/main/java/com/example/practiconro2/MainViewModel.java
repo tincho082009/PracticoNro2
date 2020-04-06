@@ -13,6 +13,8 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<Boolean> eurosDolares;
     private MutableLiveData<Boolean> textoEuros;
     private MutableLiveData<Boolean> textoDolares;
+    private MutableLiveData<String> cartel;
+
 
     public LiveData<String> getResultado(){
         if(resultado==null){
@@ -44,6 +46,12 @@ public class MainViewModel extends ViewModel {
         }
         return textoEuros;
     }
+    public LiveData<String> getCartel(){
+        if(cartel==null){
+            cartel =  new MutableLiveData<String>();
+        }
+        return cartel;
+    }
     public void cambiarEstadoDolaresEuros(){
         dolaresEuros.setValue(false);
         eurosDolares.setValue(true);
@@ -61,21 +69,22 @@ public class MainViewModel extends ViewModel {
         textoDolares.setValue(true);
     }
     public void conversion(String dolares, String euros){
-        if(textoDolares.getValue() && dolaresEuros.getValue()){
-            double dolares1, res = 0;
-            dolares1 = Double.parseDouble(dolares);
-            res = dolares1 * 0.925272;
-            resultado.setValue(res + "");
-        }else if(textoEuros.getValue() && eurosDolares.getValue()){
-            double euros1, res = 0;
-            euros1 = Double.parseDouble(euros);
-            res = euros1 * 1.08076;
-            resultado.setValue(res + "");
-        }else{
-            resultado.setValue("ERROR");
+        try{
+            if(textoDolares.getValue() && dolaresEuros.getValue()){
+                double dolares1, res = 0;
+                dolares1 = Double.parseDouble(dolares);
+                res = dolares1 * 0.925272;
+                resultado.setValue(res + "");
+                cartel.setValue("Conversion exitosa!!");
+            }else if(textoEuros.getValue() && eurosDolares.getValue()){
+                double euros1, res = 0;
+                euros1 = Double.parseDouble(euros);
+                res = euros1 * 1.08076;
+                resultado.setValue(res + "");
+                cartel.setValue("Conversion exitosa!!");
+            }
+        }catch(NumberFormatException nf ){
+            cartel.setValue("ERROR. Solo se permiten numeros");
         }
-
     }
-
-
 }
